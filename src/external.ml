@@ -142,6 +142,12 @@ let arithmetic_operations = [
   ("-.", float_float_to_float (-.));
   ("*.", float_float_to_float ( *. ));
   ("/.", float_float_to_float (/.));
+  ("**.", float_float_to_float ( ** ));
+  ("frexp", from_fun (fun v -> 
+      let (m,e) = frexp (V.to_float v) in
+        V.Value (V.Tuple [(from_float m); (from_int (Big_int.big_int_of_int e))])));   
+  ("int_of_float", from_fun (fun v -> 
+      value_int (Big_int.big_int_of_int (int_of_float (V.to_float v))))); 
 ]
 
 let string_operations = [
